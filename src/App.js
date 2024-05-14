@@ -11,7 +11,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3002/get-data');
+      const response = await axios.get('https://hodlinfo-backend-ugp7.onrender.com/get-data');
       setData(response.data);
       console.log(response.data);
     } catch (error) {
