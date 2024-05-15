@@ -1,3 +1,5 @@
+#Recruters don't be Panic plz I have deployed my Api on onrender.com bandwidth of this server is slow plz wait till the data is been loaded
+
 # Live Link
 
 [https://hodlinfo-cryptos.netlify.app/](https://hodlinfo-cryptos.netlify.app/).
