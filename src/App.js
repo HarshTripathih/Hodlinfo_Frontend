@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 function App() {
   const [data, setData] = useState([]);
   const [theme, setTheme] = useState('light');
+  const [loader,setLoader] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -13,7 +15,7 @@ function App() {
     try {
       const response = await axios.get('https://hodlinfo-backend-ugp7.onrender.com/get-data');
       setData(response.data);
-      console.log(response.data);
+      setLoader(false);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -32,6 +34,7 @@ function App() {
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
+  
 
   return (
     <div style={theme === 'light' ? lightThemeClass : darkThemeClass}>
@@ -41,6 +44,7 @@ function App() {
           Toggle Theme
         </button>
       </div>
+      
       <table
         className={`table ${theme === 'light' ? 'table-light' : 'table-dark'} table-hover`}
       >
@@ -55,7 +59,7 @@ function App() {
             <th className="text-danger">Base Unit</th>
           </tr>
         </thead>
-        <tbody>
+        {loader? (<Spinner/>):(<tbody>
           {data.map((crypto, index) => (
             <tr key={crypto.id}>
               <td>{index}</td>
@@ -67,7 +71,7 @@ function App() {
               <td>{crypto.base_unit}</td>
             </tr>
           ))}
-        </tbody>
+        </tbody>)}
       </table>
     </div>
   );
